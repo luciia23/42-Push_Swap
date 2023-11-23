@@ -31,7 +31,25 @@ int	check_desc_sorted(t_stack *stack)
 			stack = stack->next;
 		}
 		else
-		return (0);
+			return (0);
+	}
+	return (1);
+}
+
+int	check_chunck_sorted(t_stack *stack, int	size)
+{
+	int	nbr;
+
+	nbr = stack->nbr;
+	while(stack->next && size > 0)
+	{
+		if (nbr > stack->next->nbr)
+		{
+			nbr = stack->next->nbr;
+			stack = stack->next;
+		}
+		else
+			return (0);
 	}
 	return (1);
 }

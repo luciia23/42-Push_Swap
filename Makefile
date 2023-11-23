@@ -4,8 +4,7 @@ BIN = bin
 DIR_SRC = src
 
 INCLUDE = -I inc
-CFLAGS = -g 
-# -fsanitize=address -g3
+CFLAGS = -g -fsanitize=address -g3
 CC = gcc $(CFLAGS) $(INCLUDE)
 
 # ------- LIBFT -------
@@ -29,7 +28,7 @@ SRC = 	push_swap.c\
 		op_rotate.c\
 		op_rev_rotate.c\
 		push_to_b.c\
-		push_to_a.c
+		push_to_a.c\
 		
 OBJS = $(SRC:%.c=$(BIN)/%.o)
 

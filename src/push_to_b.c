@@ -1,14 +1,5 @@
 # include "push_swap.h"
 
-typedef struct {
-    t_stack **tmp;
-    int *count;
-    int *start;
-    int *end;
-    int index;
-    int mid_point;
-} CaseParameters;
-
 t_chunk *add_chunk(t_chunk **list, int start, int end, int size)
 {
 	t_chunk *new_chunk;
@@ -57,7 +48,7 @@ int	get_index(int mid_point, int *array, int size)
 	return (-1);
 }
 
-void if_case(t_ps *ps, CaseParameters *params)
+void if_case(t_ps *ps, t_parameters *params)
 {
     pb(&ps->a, &ps->b);
     if (*params->count == params->index)
@@ -66,7 +57,7 @@ void if_case(t_ps *ps, CaseParameters *params)
     (*params->count)--;
 }
 
-void else_case(t_ps *ps, CaseParameters *params)
+void else_case(t_ps *ps, t_parameters *params)
 {
     int bottom;
     
@@ -92,7 +83,7 @@ void    process_chunks(t_ps *ps, t_stack *tmp_a, int *mid_point, int *count)
     index = *count;
     start = 0;
     end = 0;
-    CaseParameters caseParams = {&tmp_a, count, &start, &end, index, *mid_point};
+    t_parameters caseParams = {&tmp_a, count, &start, &end, index, *mid_point};
     // Loop
     while (*count > 0 && !check_sorted(ps->a) && stack_size(ps->a) > 3)
     {

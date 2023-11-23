@@ -30,6 +30,15 @@ typedef struct s_ps{
     int     total_chunks;
 }               t_ps;
 
+typedef struct s_parameters {
+    t_stack **tmp;
+    int *count;
+    int *start;
+    int *end;
+    int index;
+    int mid_point;
+}           t_parameters;
+
 // UTILS
 int    ft_atoi_ps(const char *str);
 int     error(char *msg);
@@ -40,6 +49,7 @@ void    print_stacks(t_stack **a, t_stack **b);
 // SORTING UTILS
 int	check_sorted(t_stack *stack);
 int	check_desc_sorted(t_stack *stack);
+int	check_chunck_sorted(t_stack *stack, int	size);
 int	find_max(t_stack *src);
 void	insertion_sort(int *array, int size);
 int	get_index(int mid_point, int *array, int size);
