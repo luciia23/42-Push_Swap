@@ -37,6 +37,7 @@ typedef struct s_parameters {
     int *end;
     int index;
     int mid_point;
+    int array_big[3];
 }           t_parameters;
 
 // UTILS
@@ -51,6 +52,7 @@ int	check_sorted(t_stack *stack);
 int	check_desc_sorted(t_stack *stack);
 int	check_chunck_sorted(t_stack *stack, int	size);
 int	find_max(t_stack *src);
+int	find_min(t_stack *src);
 void	insertion_sort(int *array, int size);
 int	get_index(int mid_point, int *array, int size);
 

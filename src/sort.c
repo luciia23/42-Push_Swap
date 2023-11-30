@@ -11,6 +11,7 @@ void    sort_rest(t_ps *ps)
     ps->total_chunks = total_chunk;
     push_to_b(ps);
     push_to_a(ps);
+    // print_stacks(&ps->a, &ps->b);
 }
 
 void    sort_three(t_stack **a)

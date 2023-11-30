@@ -27,36 +27,68 @@ int	get_nbr_left(int mid_point, int *array, int size)
 	return (count);
 }
 
+void	act_chunk(t_stack *b, t_chunk *chunk_list, int size)
+{
+	chunk_list->start = b->nbr;
+	chunk_list->size = size;
+	while(b->next && (size - 1) > 0)
+	{
+		b = b->next;
+		size--;
+	}
+	if ((size - 1) == 0)
+		chunk_list->end = b->nbr;
+}
+
 void    process_chunk(t_ps *ps, t_stack *tmp_b, int *mid_point, int *count)
 {
 	t_stack	*tmp_a;
 	int		count_rrb;
 	int		count_rra;
+	int		c;
 
-    while (*count > 0 && ps->chunk_list->size > 2)
-    {
-		if (tmp_b->nbr > *mid_point && (find_max(ps->b) == tmp_b->nbr))
+	tmp_a = ps->a;
+	count_rra = 0;
+	count_rrb = 0;
+	c = *count;
+	if (ps->chunk_list->size > 2)
+	{
+		while (*count > 0 && ps->chunk_list->size > 2)
 		{
-			if (tmp_b->nbr < tmp_a->nbr)
-			{
-				pa(&ps->a, &ps->b);
-				if (count_rrb > 0)
+			if (count_rra > 0)
+				if (stack_last(tmp_a)->nbr > tmp_b->nbr && stack_last(tmp_a)->nbr < tmp_a->nbr)
 				{
-					while(count_rrb--)
-						rrb(&ps->b);
-					// act_chunk(*b, *chunk_list, copia - c);
+					rra(&ps->a);
+					count_rra--;
 				}
-				*count--;
+			if (tmp_b->nbr > *mid_point && (find_max(ps->b) == tmp_b->nbr))
+			{
+				if (tmp_b->nbr < tmp_a->nbr)
+				{
+					pa(&ps->a, &ps->b);
+					(*count)--;
+					if (count_rrb > 0)
+					{
+						while(count_rrb--)
+							rrb(&ps->b);
+					}
+				}
+				else if (tmp_b->nbr > tmp_a->nbr)
+				{
+					ra(&ps->a);
+					count_rra++;
+				}
 			}
-			else if (tmp_b->nbr > tmp_a->nbr)
-				ra(&ps->a);
+			else
+			{
+				rb(&ps->b);
+				count_rrb++;
+			}
+			tmp_b = ps->b;
+			tmp_a = ps->a;
 		}
-		else
-		{
-			rb(&ps->b);
-			count_rrb++;
-		}	
-    }
+		act_chunk(ps->b, ps->chunk_list, ps->chunk_list->size - c);
+	}
 }
 
 void    sort_two(t_ps *ps, t_stack *tmp)
@@ -65,6 +97,8 @@ void    sort_two(t_ps *ps, t_stack *tmp)
         sb(&ps->b);
     pa(&ps->a, &ps->b);
     pa(&ps->a, &ps->b);
+	ps->chunk_list = ps->chunk_list->next;
+	ps->total_chunks--;
 }
 
 void	last_chunk(t_ps *ps, t_stack *tmp)
@@ -72,15 +106,44 @@ void	last_chunk(t_ps *ps, t_stack *tmp)
 	int	*array;
 	int	mid_point;
 	int	count;
+	int	bottom;
+	int	c;
 
-	while(tmp->next && !check_desc_sorted(ps->b))
+	if (ps->chunk_list->size > 2)
 	{
-		array = (int *)malloc(sizeof(int) * ps->chunk_list->size);
-		mid_point = get_chunk_midpoint(&ps->b, array, ps->chunk_list->size);
-		count = get_nbr_left(mid_point, array, ps->chunk_list->size);
-		free(array);
-
+		while(tmp->next && !check_desc_sorted(ps->b) && ps->chunk_list->size > 2)
+		{
+			array = (int *)malloc(sizeof(int) * ps->chunk_list->size);
+			mid_point = get_chunk_midpoint(&ps->b, array, ps->chunk_list->size);
+			count = get_nbr_left(mid_point, array, ps->chunk_list->size);
+			free(array);
+			c = count;
+			while (count > 0)
+			{
+				if (tmp->nbr > mid_point && find_max(ps->b) == tmp->nbr)
+				{
+					pa(&ps->a, &ps->b);
+					count--;
+				}
+				else
+				{
+					bottom = stack_last(tmp)->nbr;
+					if (bottom > mid_point)
+					{
+						rrb(&ps->b);
+						pa(&ps->a, &ps->b);
+						count--;
+					}
+					else
+						rb(&ps->b);
+				}
+				tmp = ps->b;
+			}
+			act_chunk(ps->b, ps->chunk_list, ps->chunk_list->size - c);
+		}
 	}
+	if (ps->chunk_list->size == 2)
+		sort_two(ps, tmp); 
 }
 
 void    push_to_a(t_ps *ps)
@@ -102,13 +165,14 @@ void    push_to_a(t_ps *ps)
 			sort_two(ps, tmp_b);
 		else if (ps->chunk_list->size == 1)
 			pa(&ps->a, &ps->b);
-		ps->chunk_list = ps->chunk_list->next;
-		ps->total_chunks--;
+		if (ps->chunk_list->size == 0)
+		{
+			ps->chunk_list = ps->chunk_list->next;
+			ps->total_chunks--;
+		}
 		tmp_b = ps->b;
 	}
 	//chunk sorted or stack sorted?
 	if (ps->total_chunks == 1 && !check_desc_sorted(ps->b))
 		last_chunk(ps, tmp_b);
-	if (check_desc_sorted(ps->b))
-		push_them_all();
 }

@@ -8,8 +8,10 @@ t_chunk *add_chunk(t_chunk **list, int start, int end, int size)
 	//manejar error
 	new_chunk->start = start;
 	new_chunk->end = end;
-    new_chunk->size = size;
 	new_chunk->next = *list;
+    if (start == end)
+        size = 1;
+    new_chunk->size = size;
 	return (new_chunk);
 }
 
@@ -62,7 +64,8 @@ void else_case(t_ps *ps, t_parameters *params)
     int bottom;
     
     bottom = stack_last(*params->tmp)->nbr;
-    if (bottom < params->mid_point) {
+    if (bottom < params->mid_point)
+    {
         rra(&ps->a);
         pb(&ps->a, &ps->b);
         if (*params->count == params->index)
@@ -84,7 +87,6 @@ void    process_chunks(t_ps *ps, t_stack *tmp_a, int *mid_point, int *count)
     start = 0;
     end = 0;
     t_parameters caseParams = {&tmp_a, count, &start, &end, index, *mid_point};
-    // Loop
     while (*count > 0 && !check_sorted(ps->a) && stack_size(ps->a) > 3)
     {
         if (tmp_a->nbr < *mid_point)
