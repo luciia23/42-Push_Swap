@@ -37,7 +37,7 @@ typedef struct s_parameters {
     int *end;
     int index;
     int mid_point;
-    int array_big[3];
+    // int array_big[3];
 }           t_parameters;
 
 // UTILS

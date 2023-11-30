@@ -99,14 +99,35 @@ void    process_chunks(t_ps *ps, t_stack *tmp_a, int *mid_point, int *count)
     ps->total_chunks++;
 }
 
+int *get_array(t_stack **a, int **array_big, int size)
+{
+    int *array = (int *)malloc(size * sizeof(int));
+    copy_stack(*a, array, size);
+	insertion_sort(array, size);
+    int len = stack_size(*a);
+    int i = 0;
+    while (len > 0)
+    {
+        *array_big[i] = array[len];
+        i++;
+        if (i == 3)
+            break;
+    }
+    return (*array_big);
+}
+
 void    push_to_b(t_ps *ps)
 {
     t_stack *tmp_a;
     int     *array;
     int     mid_point;
     int     count;
+    int     *array_big;
 
     tmp_a = ps->a;
+    array_big = (int *)malloc(sizeof(int) * 3);
+    int size = stack_size(ps->a);
+    array_big = get_array(&ps->a, &array_big, size);
     while (tmp_a->next && stack_size(ps->a) > 3 && !check_sorted(ps->a))
     {
         array = (int *)malloc(stack_size(ps->a) * sizeof(int));
