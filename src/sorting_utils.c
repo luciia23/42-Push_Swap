@@ -50,6 +50,7 @@ int	check_chunck_sorted(t_stack *stack, int	size)
 		}
 		else
 			return (0);
+		size--;
 	}
 	return (1);
 }

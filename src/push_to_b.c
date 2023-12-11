@@ -59,12 +59,26 @@ void if_case(t_ps *ps, t_parameters *params)
     (*params->count)--;
 }
 
-void else_case(t_ps *ps, t_parameters *params)
+int contains_big(int nbr, int *array_big)
+{
+    int i;
+
+    i = 0;
+    while(i < 3)
+    {
+        if (array_big[i] == nbr)
+            return (1);
+        i++;
+    }
+    return (0);
+}
+
+void else_case(t_ps *ps, t_parameters *params, int *array_big)
 {
     int bottom;
     
     bottom = stack_last(*params->tmp)->nbr;
-    if (bottom < params->mid_point)
+    if (bottom < params->mid_point && !contains_big(bottom, array_big))
     {
         rra(&ps->a);
         pb(&ps->a, &ps->b);
@@ -72,12 +86,13 @@ void else_case(t_ps *ps, t_parameters *params)
             *params->end = bottom;
         (*params->count)--;
         *params->start = bottom;
-    } else {
+    } else
+    {
         ra(&ps->a);
     }
 }
 
-void    process_chunks(t_ps *ps, t_stack *tmp_a, int *mid_point, int *count)
+void    process_chunks(t_ps *ps, t_stack *tmp_a, int *mid_point, int *count, int *array_big)
 {
     int start;
     int end;
@@ -89,31 +104,30 @@ void    process_chunks(t_ps *ps, t_stack *tmp_a, int *mid_point, int *count)
     t_parameters caseParams = {&tmp_a, count, &start, &end, index, *mid_point};
     while (*count > 0 && !check_sorted(ps->a) && stack_size(ps->a) > 3)
     {
-        if (tmp_a->nbr < *mid_point)
+        if (tmp_a->nbr < *mid_point && !contains_big(tmp_a->nbr, array_big))
             if_case(ps, &caseParams);
         else
-            else_case(ps, &caseParams);
+            else_case(ps, &caseParams, array_big);
         tmp_a = ps->a;
     }
     ps->chunk_list = add_chunk(&ps->chunk_list, start, end, index);
     ps->total_chunks++;
 }
 
-int *get_array(t_stack **a, int **array_big, int size)
+void    get_array(t_stack **a, int *array_big, int size)
 {
     int *array = (int *)malloc(size * sizeof(int));
     copy_stack(*a, array, size);
 	insertion_sort(array, size);
-    int len = stack_size(*a);
+    int len = stack_size(*a) - 1;
     int i = 0;
-    while (len > 0)
+    while (len >= 0 && i < 3)
     {
-        *array_big[i] = array[len];
+        array_big[i] = array[len];
+        len--;
         i++;
-        if (i == 3)
-            break;
     }
-    return (*array_big);
+    free(array);
 }
 
 void    push_to_b(t_ps *ps)
@@ -122,19 +136,18 @@ void    push_to_b(t_ps *ps)
     int     *array;
     int     mid_point;
     int     count;
-    int     *array_big;
+    int     array_big[3];
 
     tmp_a = ps->a;
-    array_big = (int *)malloc(sizeof(int) * 3);
     int size = stack_size(ps->a);
-    array_big = get_array(&ps->a, &array_big, size);
+    get_array(&ps->a, array_big, size);
     while (tmp_a->next && stack_size(ps->a) > 3 && !check_sorted(ps->a))
     {
         array = (int *)malloc(stack_size(ps->a) * sizeof(int));
         mid_point = get_midpoint(&ps->a, stack_size(ps->a), array);
         count = get_index(mid_point, array, stack_size(ps->a));
         free(array);
-        process_chunks(ps, tmp_a, &mid_point, &count);
+        process_chunks(ps, tmp_a, &mid_point, &count, array_big);
         tmp_a = ps->a;
     }
     if (!check_sorted(ps->a))

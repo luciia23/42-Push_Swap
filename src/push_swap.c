@@ -6,12 +6,12 @@ int main(int argc, char *argv[]){
     a = manage_input(argc, argv);
     if (check_doubles(a))
     {
-        free_stack(&a);
+        // free_stack(&a);
         error("there are doubles in the input");
     }
     if (!check_sorted(a))
         ft_sort(&a);
     // free_stacks(&a, &b);
-    free_stack(&a);
+    // free_stack(&a);
     return (0);
 }

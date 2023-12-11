@@ -43,7 +43,7 @@ typedef struct s_parameters {
 // UTILS
 int    ft_atoi_ps(const char *str);
 int     error(char *msg);
-void	free_stack(t_stack **stack);
+void	free_stacks(t_stack **a, t_stack **b);
 void	free_str(char **str);
 void    print_stacks(t_stack **a, t_stack **b);
 
