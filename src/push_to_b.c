@@ -32,7 +32,7 @@ int	get_midpoint(t_stack **a, int size, int *array)
 {
 	copy_stack(*a, array, size);
 	insertion_sort(array, size);
-	return (array[size / 2]);
+	return (array[(size / 4)]);
 }
 
 int	get_index(int mid_point, int *array, int size)
@@ -50,15 +50,6 @@ int	get_index(int mid_point, int *array, int size)
 	return (-1);
 }
 
-void if_case(t_ps *ps, t_parameters *params)
-{
-    pb(&ps->a, &ps->b);
-    if (*params->count == params->index)
-        *params->end = (*params->tmp)->nbr;
-    *params->start = (*params->tmp)->nbr;
-    (*params->count)--;
-}
-
 int contains_big(int nbr, int *array_big)
 {
     int i;
@@ -71,6 +62,15 @@ int contains_big(int nbr, int *array_big)
         i++;
     }
     return (0);
+}
+
+void if_case(t_ps *ps, t_parameters *params)
+{
+    pb(&ps->a, &ps->b);     
+    if (*params->count == params->index)
+        *params->end = (*params->tmp)->nbr;
+    *params->start = (*params->tmp)->nbr;
+    (*params->count)--;
 }
 
 void else_case(t_ps *ps, t_parameters *params, int *array_big)
@@ -137,9 +137,10 @@ void    push_to_b(t_ps *ps)
     int     mid_point;
     int     count;
     int     array_big[3];
+    int     size;
 
     tmp_a = ps->a;
-    int size = stack_size(ps->a);
+    size = stack_size(ps->a);
     get_array(&ps->a, array_big, size);
     while (tmp_a->next && stack_size(ps->a) > 3 && !check_sorted(ps->a))
     {

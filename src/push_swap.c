@@ -1,6 +1,10 @@
 #include "push_swap.h"
 
-int main(int argc, char *argv[]){
+void check_leaks(void) { system("leaks push_swap"); }
+
+int main(int argc, char *argv[])
+{
+    // atexit(check_leaks);
     t_stack *a;
 
     a = manage_input(argc, argv);

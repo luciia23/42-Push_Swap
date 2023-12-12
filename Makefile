@@ -4,7 +4,8 @@ BIN = bin
 DIR_SRC = src
 
 INCLUDE = -I inc
-CFLAGS = -g -fsanitize=address -g3
+CFLAGS = -g 
+# -fsanitize=address -g3
 CC = gcc $(CFLAGS) $(INCLUDE)
 
 # ------- LIBFT -------

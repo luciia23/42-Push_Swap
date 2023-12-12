@@ -1,5 +1,17 @@
 # include "push_swap.h"
 
+void free_chunks(t_chunk **list)
+{
+    t_chunk *tmp;
+
+    while (*list) {
+        tmp = (*list)->next;
+        free(*list);
+        *list = tmp;
+    }
+    free(*list);
+}
+
 void    sort_rest(t_ps *ps)
 {
     t_chunk *chunk_list;
@@ -10,10 +22,11 @@ void    sort_rest(t_ps *ps)
     ps->chunk_list = chunk_list;
     ps->total_chunks = total_chunk;
     push_to_b(ps);
-    if (!check_sorted(ps->a))
-        push_to_a(ps);
+    // if (!check_sorted(ps->a)) && stack b == NULL
+    push_to_a(ps);
     // print_stacks(&ps->a, &ps->b);
-    // free_stacks(&ps->a, &ps->b);
+    free_stacks(&ps->a, &ps->b);
+    // free_chunks(&ps->chunk_list); --> to do
 }
 
 void    sort_three(t_stack **a)
