@@ -1,20 +1,5 @@
 # include "push_swap.h"
 
-t_chunk *add_chunk(t_chunk **list, int start, int end, int size)
-{
-	t_chunk *new_chunk;
-    
-    new_chunk =  (t_chunk *)malloc(sizeof(t_chunk));
-	//manejar error
-	new_chunk->start = start;
-	new_chunk->end = end;
-	new_chunk->next = *list;
-    if (start == end)
-        size = 1;
-    new_chunk->size = size;
-	return (new_chunk);
-}
-
 void	copy_stack(t_stack *a, int *array, int size)
 {
 	int	i;
@@ -110,8 +95,6 @@ void    process_chunks(t_ps *ps, t_stack *tmp_a, int *mid_point, int *count, int
             else_case(ps, &caseParams, array_big);
         tmp_a = ps->a;
     }
-    ps->chunk_list = add_chunk(&ps->chunk_list, start, end, index);
-    ps->total_chunks++;
 }
 
 void    get_array(t_stack **a, int *array_big, int size)

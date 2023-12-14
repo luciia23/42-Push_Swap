@@ -26,8 +26,6 @@ typedef struct s_chunk
 typedef struct s_ps{
     t_stack *a;
     t_stack *b;
-    t_chunk *chunk_list;
-    int     total_chunks;
 }               t_ps;
 
 typedef struct s_parameters {
