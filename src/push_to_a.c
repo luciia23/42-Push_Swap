@@ -62,4 +62,6 @@ void	push_to_a(t_ps *ps)
 		push_them(ps, stack, array, total);
 		total--;
 	}
+	free(array);
+	free(stack);
 }

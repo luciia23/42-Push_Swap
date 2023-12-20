@@ -8,10 +8,10 @@ int main(int argc, char *argv[])
     t_stack *a;
 
     a = manage_input(argc, argv);
-    if (check_doubles(a))
+    if (!a || check_doubles(a))
     {
         // free_stack(&a);
-        error("there are doubles in the input");
+        error("there are doubles in the input or wrong input");
     }
     if (!check_sorted(a))
         ft_sort(&a);
