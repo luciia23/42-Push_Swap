@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lcollado <lcollado@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/20 11:49:24 by lcollado          #+#    #+#             */
+/*   Updated: 2023/12/20 11:53:42 by lcollado         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	free_stack(t_stack **stack)
@@ -26,7 +38,7 @@ void	free_str(char **str)
 	int	i;
 
 	i = 0;
-	while(str[i])
+	while (str[i])
 	{
 		free(str[i]);
 		i++;
@@ -34,15 +46,15 @@ void	free_str(char **str)
 	free(str);
 }
 
-int error(char *msg)
+int	error(char *msg)
 {
- 	ft_putstr_fd("\033[0;31m" " Error : ", 2);
+	ft_putstr_fd("\033[0;31m" " Error : ", 2);
 	ft_putstr_fd(msg, 2);
 	ft_putstr_fd("\n", 2);
-	exit(0);   
+	exit(0);
 }
 
-int ft_atoi_ps(const char *str)
+int	ft_atoi_ps(const char *str)
 {
 	unsigned int	i;
 	long int		sign;
@@ -62,14 +74,13 @@ int ft_atoi_ps(const char *str)
 		i++;
 	while ((str[i] != 0))
 	{
-        if (!ft_isdigit(str[i]))
-            error("there is a char in the input");
+		if (!ft_isdigit(str[i]))
+			error("there is a char in the input");
 		result *= 10;
 		result += str[i] - '0';
 		i++;
 	}
-
 	if ((result * sign) > 2147483647 || (result * sign) < -2147483648)
 		error("the input has to be an integer");
-	return (result * sign); 
+	return (result * sign);
 }

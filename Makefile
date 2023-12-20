@@ -1,11 +1,24 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: lcollado <lcollado@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/12/20 12:01:22 by lcollado          #+#    #+#              #
+#    Updated: 2023/12/20 12:09:34 by lcollado         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = push_swap
 
 BIN = bin
 DIR_SRC = src
 
 INCLUDE = -I inc
-CFLAGS = -g -fsanitize=address -g3
+CFLAGS = -g 
 CC = gcc $(CFLAGS) $(INCLUDE)
+# -fsanitize=address -g3
 
 # ------- LIBFT -------
 LIBFT_DIR = libft

@@ -1,33 +1,45 @@
-# include "push_swap.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   op_rotate.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lcollado <lcollado@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/20 11:39:53 by lcollado          #+#    #+#             */
+/*   Updated: 2023/12/20 11:40:40 by lcollado         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int rotate_stack(t_stack **src)
+#include "push_swap.h"
+
+int	rotate_stack(t_stack **src)
 {
-    t_stack *tmp;
+	t_stack	*tmp;
 
-    if (!*src || !(*src)->next)
-        return (0);
-    tmp = *src;
-    *src = stack_last(*src);
-    (*src)->next = tmp;
-    *src = tmp->next;
-    tmp->next = NULL;
-    return (1);
+	if (!*src || !(*src)->next)
+		return (0);
+	tmp = *src;
+	*src = stack_last(*src);
+	(*src)->next = tmp;
+	*src = tmp->next;
+	tmp->next = NULL;
+	return (1);
 }
 
-void    ra(t_stack **a)
+void	ra(t_stack **a)
 {
-    if (rotate_stack(&(*a)))
-        write(1, "ra\n", 3);
+	if (rotate_stack(&(*a)))
+		write(1, "ra\n", 3);
 }
 
-void    rb(t_stack **b)
+void	rb(t_stack **b)
 {
-    if (rotate_stack(&(*b)))
-        write(1, "rb\n", 3);
+	if (rotate_stack(&(*b)))
+		write(1, "rb\n", 3);
 }
 
-void    rr(t_stack **a, t_stack **b)
+void	rr(t_stack **a, t_stack **b)
 {
-    if (rotate_stack(&(*a)) && rotate_stack(&(*b)))
-        write(1, "rr\n", 3);
+	if (rotate_stack(&(*a)) && rotate_stack(&(*b)))
+		write(1, "rr\n", 3);
 }

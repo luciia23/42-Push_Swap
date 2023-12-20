@@ -1,4 +1,16 @@
-# include "push_swap.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_to_a.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lcollado <lcollado@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/20 11:41:47 by lcollado          #+#    #+#             */
+/*   Updated: 2023/12/20 11:42:45 by lcollado         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "push_swap.h"
 
 void	rotate(t_ps *ps, int i)
 {
@@ -31,7 +43,7 @@ void	push_them(t_ps *ps, int *stack, int *array, int total)
 	int	i;
 
 	i = 0;
-	while(i < total)
+	while (i < total)
 	{
 		if (stack[i] == array[total - 1])
 			break ;
@@ -43,7 +55,6 @@ void	push_them(t_ps *ps, int *stack, int *array, int total)
 		rotate(ps, i);
 	else
 		rrotate(ps, total - i);
-	
 }
 
 void	push_to_a(t_ps *ps)
@@ -55,7 +66,7 @@ void	push_to_a(t_ps *ps)
 	total = stack_size(ps->b);
 	stack = (int *)malloc(sizeof(int) * total);
 	array = (int *)malloc(sizeof(int) * total);
-	while(total >= 0)
+	while (total >= 0)
 	{
 		copy_stack(ps->b, stack, total);
 		sorted_array(ps->b, array, total);
