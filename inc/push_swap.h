@@ -6,7 +6,7 @@
 /*   By: lcollado <lcollado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 11:54:42 by lcollado          #+#    #+#             */
-/*   Updated: 2023/12/20 12:04:22 by lcollado         ###   ########.fr       */
+/*   Updated: 2023/12/20 20:33:20 by lcollado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
+#include <stdbool.h>
 
 # include "../libft/libft.h"
 

@@ -6,7 +6,7 @@
 #    By: lcollado <lcollado@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/20 12:01:22 by lcollado          #+#    #+#              #
-#    Updated: 2023/12/20 12:09:34 by lcollado         ###   ########.fr        #
+#    Updated: 2023/12/20 20:42:00 by lcollado         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ GREEN			=	\033[0;32m
 
 SRC = 	push_swap.c\
 		utils.c\
+		ft_atoi_ps.c\
 		input.c\
 		stack_utils.c\
 		sorting_utils.c\
