@@ -6,7 +6,7 @@
 /*   By: lcollado <lcollado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 11:46:54 by lcollado          #+#    #+#             */
-/*   Updated: 2024/01/07 17:01:30 by lcollado         ###   ########.fr       */
+/*   Updated: 2024/01/07 17:23:51 by lcollado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,24 +29,6 @@ int	check_sorted(t_stack *stack)
 	}
 	return (1);
 }
-
-// int	check_desc_sorted(t_stack *stack)
-// {
-// 	int	nbr;
-
-// 	nbr = stack->nbr;
-// 	while (stack->next)
-// 	{
-// 		if (nbr > stack->next->nbr)
-// 		{
-// 			nbr = stack->next->nbr;
-// 			stack = stack->next;
-// 		}
-// 		else
-// 			return (0);
-// 	}
-// 	return (1);
-// }
 
 void	sorting_array(int *array, int size)
 {
