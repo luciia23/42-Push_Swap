@@ -6,7 +6,7 @@
 /*   By: lcollado <lcollado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 11:41:47 by lcollado          #+#    #+#             */
-/*   Updated: 2023/12/20 11:42:45 by lcollado         ###   ########.fr       */
+/*   Updated: 2024/01/07 13:32:36 by lcollado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	rrotate(t_ps *ps, int i)
 void	sorted_array(t_stack *b, int *array, int size)
 {
 	copy_stack(b, array, size);
-	insertion_sort(array, size);
+	sorting_array(array, size);
 }
 
 void	push_them(t_ps *ps, int *stack, int *array, int total)

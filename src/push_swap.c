@@ -6,28 +6,25 @@
 /*   By: lcollado <lcollado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 11:40:26 by lcollado          #+#    #+#             */
-/*   Updated: 2023/12/20 20:35:57 by lcollado         ###   ########.fr       */
+/*   Updated: 2024/01/07 16:36:36 by lcollado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void check_leaks(void) { system("leaks push_swap"); }
-
 int	main(int argc, char *argv[])
 {
 	t_stack	*a;
-	// atexit(check_leaks);
 
 	a = manage_input(argc, argv);
 	if (!a || check_doubles(a))
 	{
-		// free_stack(&a);
-		error("there are doubles in the input or wrong input");
+		free_stack(&a);
+		error();
 	}
 	if (!check_sorted(a))
 		ft_sort(&a);
-	// free_stacks(&a, &b);
-	// free_stack(&a);
+	if (a)
+		free_stack(&a);
 	return (0);
 }

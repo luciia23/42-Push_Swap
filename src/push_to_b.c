@@ -6,7 +6,7 @@
 /*   By: lcollado <lcollado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 11:42:55 by lcollado          #+#    #+#             */
-/*   Updated: 2023/12/20 12:03:58 by lcollado         ###   ########.fr       */
+/*   Updated: 2024/01/07 13:33:09 by lcollado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	get_midpoint(t_stack **a, int size, int *array)
 {
 	copy_stack(*a, array, size);
-	insertion_sort(array, size);
+	sorting_array(array, size);
 	return (array[(size / 4)]);
 }
 
@@ -29,7 +29,7 @@ void	get_array(t_stack **a, int *array_big, int size)
 	len = stack_size(*a) - 1;
 	i = 0;
 	copy_stack(*a, array, size);
-	insertion_sort(array, size);
+	sorting_array(array, size);
 	while (len >= 0 && i < 3)
 	{
 		array_big[i] = array[len];

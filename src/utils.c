@@ -6,7 +6,7 @@
 /*   By: lcollado <lcollado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 11:49:24 by lcollado          #+#    #+#             */
-/*   Updated: 2023/12/20 20:42:45 by lcollado         ###   ########.fr       */
+/*   Updated: 2024/01/07 17:01:47 by lcollado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,8 @@ void	free_str(char **str)
 	free(str);
 }
 
-int	error(char *msg)
+void	error(void)
 {
-	ft_putstr_fd("\033[0;31m" " Error : ", 2);
-	ft_putstr_fd(msg, 2);
-	ft_putstr_fd("\n", 2);
-	exit(0);
+	ft_putstr_fd("Error\n", 2);
+	exit(EXIT_FAILURE);
 }

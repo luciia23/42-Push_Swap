@@ -6,7 +6,7 @@
 /*   By: lcollado <lcollado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 11:37:17 by lcollado          #+#    #+#             */
-/*   Updated: 2023/12/20 11:37:41 by lcollado         ###   ########.fr       */
+/*   Updated: 2024/01/07 16:33:11 by lcollado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,15 @@ t_stack	*manage_input(int argc, char *argv[])
 	i = 1;
 	a = NULL;
 	if (argc < 2)
-		error("no input provided");
+		error();
 	if (argc == 2)
 		a = manage_string(argv);
 	else
 	{
 		while (i < argc)
 		{
+			if (argv[i][0] == ' ' || argv[i][0] == '\0')
+				error();
 			nbr = ft_atoi_ps(argv[i]);
 			add_back(&a, new_stack(nbr));
 			i++;

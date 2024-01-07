@@ -6,7 +6,7 @@
 /*   By: lcollado <lcollado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 11:48:41 by lcollado          #+#    #+#             */
-/*   Updated: 2023/12/20 12:18:18 by lcollado         ###   ########.fr       */
+/*   Updated: 2024/01/07 16:19:00 by lcollado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_stack	*new_stack(int nbr)
 
 	new = (t_stack *)malloc(sizeof(t_stack));
 	if (!new)
-		error("malloc failed");
+		error();
 	new->nbr = nbr;
 	new->next = NULL;
 	return (new);

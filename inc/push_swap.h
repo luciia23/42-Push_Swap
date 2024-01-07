@@ -6,7 +6,7 @@
 /*   By: lcollado <lcollado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 11:54:42 by lcollado          #+#    #+#             */
-/*   Updated: 2023/12/20 20:33:20 by lcollado         ###   ########.fr       */
+/*   Updated: 2024/01/07 16:32:45 by lcollado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
-#include <stdbool.h>
+# include <stdbool.h>
 
 # include "../libft/libft.h"
 
@@ -29,25 +29,27 @@ typedef struct s_stack
 	struct s_stack	*next;
 }					t_stack;
 
-typedef struct s_ps{
+typedef struct s_ps
+{
 	t_stack	*a;
 	t_stack	*b;
 }					t_ps;
 
 // UTILS
 int		ft_atoi_ps(const char *str);
-int		error(char *msg);
+void	error(void);
 void	free_stacks(t_stack **a, t_stack **b);
 void	free_stack(t_stack **stack);
 void	free_str(char **str);
-void	print_stacks(t_stack **a, t_stack **b);
+// void	print_stacks(t_stack **a, t_stack **b);
 
 // SORTING UTILS
 int		check_sorted(t_stack *stack);
 int		check_desc_sorted(t_stack *stack);
 int		find_max(t_stack *src);
+int		find_min(t_stack *src);
 int		contains_big(int nbr, int *array_big);
-void	insertion_sort(int *array, int size);
+void	sorting_array(int *array, int size);
 int		get_index(int mid_point, int *array, int size);
 
 // STACK UTILS
